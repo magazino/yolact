@@ -128,6 +128,20 @@ dataset_base = Config({
     'label_map': None
 })
 
+lloyd_dataset = dataset_base.copy({
+    'name': 'Lloyd Dataset',
+
+    'train_images': './data/lloyd/images',
+    'valid_images': './data/lloyd/images',
+
+    'train_info': './data/lloyd/annotations/train.json',
+    'valid_info': './data/lloyd/annotations/val.json',
+
+    'has_gt': True,
+    'class_names': ('box'),
+    'label_map': {1:1}
+})
+
 coco2014_dataset = dataset_base.copy({
     'name': 'COCO 2014',
     
@@ -748,6 +762,11 @@ yolact_resnet50_config = yolact_base_config.copy({
         'preapply_sqrt': False,
         'use_square_anchors': True, # This is for backward compatability with a bug
     }),
+})
+
+lloyd_config = yolact_resnet50_config.copy({
+    'dataset': lloyd_dataset,
+    'num_classes': 2,
 })
 
 
